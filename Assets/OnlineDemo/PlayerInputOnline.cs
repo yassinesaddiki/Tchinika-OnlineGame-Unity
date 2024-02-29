@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputOnline : MonoBehaviour
 {
     [SerializeField] private CharMoveOnline _characterMovement;
+    [SerializeField] private CharRotOnline _characterRotation;
 
     private void OnMove(InputValue inputValue)
     {
