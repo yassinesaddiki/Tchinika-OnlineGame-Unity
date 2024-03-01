@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -24,6 +25,12 @@ public class PlayerShootingOnline : BaseWeaponOnline
 
     private void OnFire(InputValue inputValue)
     {
+        if (!IsOwner)
+        {
+            Debug.Log("Player is not the owner. Cannot shoot.");
+            return;
+        }
+
         fireContinuously = inputValue.isPressed;
 
         if (fireContinuously)
@@ -31,23 +38,45 @@ public class PlayerShootingOnline : BaseWeaponOnline
             float timeSinceLastFire = Time.time - lastTimeFired;
             if (timeSinceLastFire >= timeBetweenShots)
             {
-                Fire();
+                if(IsServer)
+                {
+                    SpawnTheProjectile();
+                }
+                else
+                {
+                    SpawnTheProjectileServerRPC();
+                }
                 lastTimeFired = Time.time;
+            }
+            else
+            {
+                Debug.Log("Fire rate limit reached. Cannot shoot.");
             }
         }
     }
-    public override void Fire()
+
+    [ServerRpc(RequireOwnership =false)]
+    private void SpawnTheProjectileServerRPC()
     {
-        if(!IsOwner) return;
-        if (ammoSystem.UseAmmo(ammoType, 1))
-        {
-            GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            projectile.GetComponent<NetworkObject>().Spawn(true);
-            projectile.GetComponent<ProjectilesOnline>().Speed = bulletSpeed;
-            projectile.GetComponent<ProjectilesOnline>().Damage = bulletDamage;
-        }
+        SpawnTheProjectile();
     }
 
+    private void SpawnTheProjectile()
+    {
+        Fire(projectilePrefab, firePoint.position, firePoint.rotation); 
+    }
+
+    public override void Fire(GameObject _projectilePrefab, Vector3 _position, Quaternion _rotation)
+    {
+        if (ammoSystem.UseAmmo(ammoType, 1))
+        {
+            GameObject projectile = Instantiate(_projectilePrefab, _position, _rotation);
+            projectile.GetComponent<ProjectilesOnline>().Speed = bulletSpeed;
+            projectile.GetComponent<ProjectilesOnline>().Damage = bulletDamage;
+            projectile.GetComponent<NetworkObject>().Spawn(true);
+            Debug.Log("Bullet spawned locally on client.");
+        }
+    }
 
     private void OnReload(InputValue inputValue)
     {

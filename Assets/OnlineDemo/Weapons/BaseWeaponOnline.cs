@@ -28,7 +28,7 @@ public abstract class BaseWeaponOnline : NetworkBehaviour
         ammoSystem.ReloadAmmo(ammoType);
     }
 
-    public abstract void Fire();
+    public abstract void Fire(GameObject _projectilePrefab, Vector3 _position, Quaternion _rotation);
 
     protected virtual void Start()
     {
