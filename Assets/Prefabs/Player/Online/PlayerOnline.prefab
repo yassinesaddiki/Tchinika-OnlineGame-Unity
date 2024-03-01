@@ -69,8 +69,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2889381440203903729, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 7011070857369747410, guid: 845a3dd22aa283943828298898926032, type: 3}
+    - target: {fileID: 2889381440203903729, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
       propertyPath: timeBetweenShots
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078348542165443889, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4689048264985314830, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -88,6 +96,7 @@ PrefabInstance:
     - {fileID: 3931133479987041739, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
     - {fileID: 2825395985766349241, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
     - {fileID: 1690875412662692033, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
+    - {fileID: 2889381440203903729, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -121,6 +130,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5111850421747574823, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5877233333576940784}
+    - targetCorrespondingSourceObject: {fileID: 5111850421747574823, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2871105451803585022}
   m_SourcePrefab: {fileID: 100100000, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
 --- !u!1 &1918520643193240603 stripped
 GameObject:
@@ -212,6 +224,11 @@ MonoBehaviour:
 --- !u!4 &6299725958135937298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7083201687951842695, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
+  m_PrefabInstance: {fileID: 3828491832374781077}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6982038892562878765 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6180247557772604856, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
   m_PrefabInstance: {fileID: 3828491832374781077}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7555591333034342416 stripped
@@ -375,3 +392,24 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &2871105451803585022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8345585546589834418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089fa32b2fa63414dae78f12cdf1d07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7011070857369747410, guid: 845a3dd22aa283943828298898926032, type: 3}
+  firePoint: {fileID: 6982038892562878765}
+  bulletSpeed: 30
+  bulletDamage: 5
+  timeBetweenShots: 1.5
+  MagazineSize: 15
+  ammoType: 0
+  ammoUI: {fileID: 0}
+  ammoSystem: {fileID: 5569623588132463009}
