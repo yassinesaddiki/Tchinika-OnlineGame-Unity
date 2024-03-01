@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4856141221670860631}
   - component: {fileID: 3596598150190197987}
-  - component: {fileID: 2718097345107848397}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -27,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 5734729337487552536}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.278, y: 0.347, z: -0.03239017}
-  m_LocalScale: {x: 0.0627, y: 0.0971, z: 1}
+  m_LocalPosition: {x: 0.4565, y: 0.4046, z: -0.03239017}
+  m_LocalScale: {x: 0.17797396, y: 0.27561834, z: 2.8385}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2021555729312769365}
@@ -75,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 0.9904165, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.099488735, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,29 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &2718097345107848397
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5734729337487552536}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.039283395
-  m_Height: 2.227103
-  m_Direction: 1
-  m_Center: {x: -0.000004753161, y: 0.0000010742341, z: 0}
 --- !u!1 &7011070857369747410
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1855318599
+  GlobalObjectIdHash: 69720773
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
