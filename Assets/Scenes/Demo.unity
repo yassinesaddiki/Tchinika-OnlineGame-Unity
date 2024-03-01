@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 1134469662}
   - component: {fileID: 1134469663}
   m_Layer: 0
-  m_Name: WorldManagement System
+  m_Name: PathFinding System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1624,6 +1624,10 @@ PrefabInstance:
     - target: {fileID: 2889381440203903729, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
       propertyPath: timeBetweenShots
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343291044702419807, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3543249500
       objectReference: {fileID: 0}
     - target: {fileID: 6772098002508504197, guid: 427e58833d7bb6d49b52ccedae604f43, type: 3}
       propertyPath: m_Name
