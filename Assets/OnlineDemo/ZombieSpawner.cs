@@ -8,6 +8,7 @@ public class ZombieSpawner : NetworkBehaviour
     [SerializeField] private GameObject zombiePrefab;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float spawnInterval = 5f;
+    private int counter = 0;
 
     void Start()
     {
@@ -30,8 +31,10 @@ public class ZombieSpawner : NetworkBehaviour
     void SpawnZombieServerRpc()
     {
         // Instantiate a zombie at the spawn point
+        if (counter > 4) { return; }
         GameObject MyZombie = Instantiate(zombiePrefab, spawnPoint.position, Quaternion.identity);
         MyZombie.GetComponent<NetworkObject>().Spawn(true);
+        counter++;
 
     }
 }

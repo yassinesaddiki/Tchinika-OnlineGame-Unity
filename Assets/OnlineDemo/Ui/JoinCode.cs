@@ -9,6 +9,7 @@ using IngameDebugConsole;
 using UnityEngine.UI;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport.Relay;
 
 public class JoinCode : MonoBehaviour
 {
@@ -31,13 +32,8 @@ public class JoinCode : MonoBehaviour
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             Debug.Log($"Join code: {joinCode}");
 
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetHostRelayData(
-                    allocation.RelayServer.IpV4,
-                    (ushort)allocation.RelayServer.Port,
-                    allocation.AllocationIdBytes,
-                    allocation.Key,
-                    allocation.ConnectionData
-                ) ;
+            RelayServerData relayServerData = new RelayServerData(allocation,"dtls");
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData) ;
 
             NetworkManager.Singleton.StartHost();
         }
@@ -54,14 +50,8 @@ public class JoinCode : MonoBehaviour
             Debug.Log("Joining Relay with join code: " + joinCode);
             JoinAllocation jA = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetClientRelayData(
-                    jA.RelayServer.IpV4,
-                    (ushort)jA.RelayServer.Port,
-                    jA.AllocationIdBytes,
-                    jA.Key,
-                    jA.ConnectionData,
-                    jA.HostConnectionData
-                );
+            RelayServerData relayServerData = new RelayServerData(jA,"dtls");
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData) ;
 
             NetworkManager.Singleton.StartClient();
         }

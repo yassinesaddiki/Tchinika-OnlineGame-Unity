@@ -7,18 +7,28 @@ public class CharRotOnline : NetworkBehaviour
 {
     [SerializeField] private Transform _body;
     [SerializeField] private GameObject _weaponObject;
-    private Camera _mainCamera;
+    [SerializeField] private Camera _mainCamera;
 
-    private void Awake()
-    {
-        _mainCamera = Camera.main;
-    }
 
     private void Update()
     {
         if (!IsOwner) return;
         Aim();
         FlipCharacter();
+    }
+    //Camera Following the Player
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            //Activating Audio Listener
+            _mainCamera.enabled = true;
+        }
+        else
+        {
+            _mainCamera.enabled = false;
+        }
+
     }
 
     private void Aim()
