@@ -1,37 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using Pathfinding;
+using Unity.Netcode;
 
-public class ZombieV1Input : MonoBehaviour
+public class ZombieV1Input : NetworkBehaviour
 {
-    public Transform target;
     public float speed = 200f;
     public float nexWaypointDistance = 3f;
     public Transform enemyGFX;
-    // Start is called before the first frame update
-    Pathfinding.Path path;
+
+    Path path;
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
     Seeker seeker;
     Rigidbody2D rb;
+
+    List<Transform> players = new List<Transform>(); // List to store player transforms
+
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+
         InvokeRepeating("UpdatePath", 0f, .5f);
+
+        if (IsServer)
+        {
+            StartCoroutine(UpdatePlayerList());
+        }
     }
+
+    IEnumerator UpdatePlayerList()
+    {
+        while (true)
+        {
+            players.Clear();
+
+            // Find all players in the scene
+            foreach (KeyValuePair<ulong, NetworkObject> kvp in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
+            {
+                if (kvp.Value.gameObject.CompareTag("Player"))
+                {
+                    players.Add(kvp.Value.transform);
+                }
+            }
+
+            yield return new WaitForSeconds(1f); // Adjust the interval based on your needs
+        }
+    }
+
     void UpdatePath()
     {
-        if (seeker.IsDone())
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
+        if (!rb || players.Count == 0) return;
 
-        seeker.StartPath(rb.position, target.position, OnPathComplete);
+        float shortestDistance = Mathf.Infinity;
+        Transform closestPlayer = null;
+
+        // Find the closest player
+        foreach (Transform player in players)
+        {
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            if (distanceToPlayer < shortestDistance)
+            {
+                shortestDistance = distanceToPlayer;
+                closestPlayer = player;
+            }
+        }
+
+        if (closestPlayer != null && seeker.IsDone())
+            seeker.StartPath(rb.position, closestPlayer.position, OnPathComplete);
     }
 
-    // Update is called once per frame
-    void OnPathComplete(Pathfinding.Path p)
+    void OnPathComplete(Path p)
     {
         if (!p.error)
         {
@@ -39,38 +80,39 @@ public class ZombieV1Input : MonoBehaviour
             currentWaypoint = 0;
         }
     }
-    private void Update()
+
+    void Update()
     {
-        if (path == null)
-            return;
+        if (path == null) return;
+
         if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
             return;
-
         }
         else
         {
             reachedEndOfPath = false;
         }
+
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
         rb.AddForce(force);
+
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (distance < nexWaypointDistance)
         {
             currentWaypoint++;
         }
+
+        // Flip the sprite based on movement direction
         if (rb.velocity.x >= 0.01f)
         {
-            // Set local scale to its original value
             enemyGFX.localScale = new Vector3(Mathf.Abs(enemyGFX.localScale.x), enemyGFX.localScale.y, enemyGFX.localScale.z);
         }
         else if (rb.velocity.x <= -0.01f)
         {
-            // Flip the sprite horizontally by negating the x-scale
             enemyGFX.localScale = new Vector3(-Mathf.Abs(enemyGFX.localScale.x), enemyGFX.localScale.y, enemyGFX.localScale.z);
         }
     }
-
 }
