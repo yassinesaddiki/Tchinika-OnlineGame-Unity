@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9bfa627bbc9bd44a972e69a760ece8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2500
+  speed: 3500
   nexWaypointDistance: 3
   enemyGFX: {fileID: 1681401571242187815}
   Dust: {fileID: 637641865477092919}
