@@ -91,5 +91,9 @@ public class LoginUser : MonoBehaviour
             }
         }
     }
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Scenes/MainMenu");
+    }
 }
 

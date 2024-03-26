@@ -80,4 +80,8 @@ public class RegisterUser : MonoBehaviour
             }
         }
     }
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Scenes/MainMenu");
+    }
 }
