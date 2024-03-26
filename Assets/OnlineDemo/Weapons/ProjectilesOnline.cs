@@ -8,8 +8,8 @@ public class ProjectilesOnline : NetworkBehaviour
     [SerializeField] private float _speed = 10f;
     [SerializeField] private int _damage = 1;
     [SerializeField] private float destroyRadius = 20f;
+    [SerializeField] private float destroyDelay = 3f; // Time to wait before destroying the projectile
 
-    //Getters & Setters
     public float Speed
     {
         get { return _speed; }
@@ -24,13 +24,12 @@ public class ProjectilesOnline : NetworkBehaviour
     {
         // Move the projectile forward
         transform.Translate(Vector2.right * _speed * Time.deltaTime);
-        // Check if the projectile is beyond the destroy radius
     }
-    private void DestroyProjectile()
+
+    private IEnumerator Start()
     {
-        // Destroy the projectile
-        NetworkObject.Destroy(gameObject);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(destroyDelay);
+        DestroyProjectile();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,6 +43,13 @@ public class ProjectilesOnline : NetworkBehaviour
         }
 
         // Destroy the projectile on collision
+        DestroyProjectile();
+    }
+
+    private void DestroyProjectile()
+    {
+        // Destroy the projectile
+        NetworkObject.Destroy(gameObject);
         Destroy(gameObject);
     }
 }

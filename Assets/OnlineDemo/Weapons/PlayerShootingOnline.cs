@@ -11,6 +11,7 @@ public class PlayerShootingOnline : BaseWeaponOnline
     private bool fireContinuously;
     [SerializeField] private AmmoUI ammoUI;
     [SerializeField] private AmmoSystem ammoSystem;
+    public AnimatedTexture muzzleFlashAnimation;
 
     private void Start()
     {
@@ -68,13 +69,21 @@ public class PlayerShootingOnline : BaseWeaponOnline
 
     public override void Fire(GameObject _projectilePrefab, Vector3 _position, Quaternion _rotation)
     {
-        if (ammoSystem.UseAmmo(ammoType, 1))
+        //Here Where I desactivate Consuming Ammo
+        if (ammoSystem.UseAmmo(ammoType, 0))
         {
             GameObject projectile = Instantiate(_projectilePrefab, _position, _rotation);
             projectile.GetComponent<ProjectilesOnline>().Speed = bulletSpeed;
             projectile.GetComponent<ProjectilesOnline>().Damage = bulletDamage;
             projectile.GetComponent<NetworkObject>().Spawn(true);
             Debug.Log("Bullet spawned locally on client.");
+
+            // Play muzzle flash animation
+            if (muzzleFlashAnimation != null)
+            {
+                muzzleFlashAnimation.ResetAnimation(); // Reset to first frame
+                muzzleFlashAnimation.Play();
+            }
         }
     }
 

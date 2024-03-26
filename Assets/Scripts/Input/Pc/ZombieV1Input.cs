@@ -7,8 +7,9 @@ using Unity.Netcode;
 public class ZombieV1Input : NetworkBehaviour
 {
     public float speed = 200f;
-    public float nexWaypointDistance = 3f;
+    [SerializeField] private float nexWaypointDistance = 3f;
     public Transform enemyGFX;
+    public ParticleSystem Dust = null;
 
     Path path;
     int currentWaypoint = 0;
@@ -98,6 +99,7 @@ public class ZombieV1Input : NetworkBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
         rb.AddForce(force);
+        if(Dust != null) Dust.Play();
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (distance < nexWaypointDistance)

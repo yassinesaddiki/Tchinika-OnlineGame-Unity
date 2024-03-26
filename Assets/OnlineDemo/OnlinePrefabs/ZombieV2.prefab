@@ -266,10 +266,10 @@ GameObject:
   - component: {fileID: 2492597900245697434}
   - component: {fileID: 6479916685290493283}
   - component: {fileID: 8521530421581470939}
+  - component: {fileID: -1425793706079260576}
   - component: {fileID: 7536796086362700139}
   - component: {fileID: 6017745017410814780}
   - component: {fileID: 3848488095137324810}
-  - component: {fileID: -1425793706079260576}
   - component: {fileID: 4669478796387741247}
   m_Layer: 0
   m_Name: ZombieV2
@@ -412,6 +412,26 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &-1425793706079260576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667321569035216581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2171847917
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &7536796086362700139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,8 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9bfa627bbc9bd44a972e69a760ece8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3578817450019787576, guid: 2dd4b77ad2c642a4c92b55ada957621d, type: 3}
-  speed: 400
+  speed: 600
   nexWaypointDistance: 3
   enemyGFX: {fileID: 1229044776786294120}
 --- !u!114 &6017745017410814780
@@ -444,6 +463,7 @@ MonoBehaviour:
   knockbackForce: 1
   knockbackDuration: 0.2
   playerHealth: {fileID: 0}
+  _zombieType: 0
 --- !u!212 &3848488095137324810
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -496,26 +516,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-1425793706079260576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3667321569035216581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3247872574
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &4669478796387741247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +720,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7233848283321562677, guid: bc274305ce9e7fd4a8d56afc5822a740, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1154890836
+      value: 2171847917
       objectReference: {fileID: 0}
     - target: {fileID: 5224890472951151787, guid: bc274305ce9e7fd4a8d56afc5822a740, type: 3}
       propertyPath: m_LocalPosition.x
